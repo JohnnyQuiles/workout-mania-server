@@ -13,7 +13,7 @@ mongoose.connect(process.env.MONGODB_URI)
   }).catch((error) => {
     console.log("Error", error);
   });
-
+console.log('HELOO');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users/usersRouter');
 const workoutsRouter = require('./routes/workouts/workoutsRouter');
