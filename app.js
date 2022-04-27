@@ -4,6 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const dotenv = require('dotenv');
+const cors = require('cors');
+
 const mongoose = require("mongoose");
 require("dotenv").config();
 
@@ -13,7 +16,7 @@ mongoose.connect(process.env.MONGODB_URI)
   }).catch((error) => {
     console.log("Error", error);
   });
-console.log('HELOO');
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users/usersRouter');
 const workoutsRouter = require('./routes/workouts/workoutsRouter');
@@ -25,6 +28,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
+
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
