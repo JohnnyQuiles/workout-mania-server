@@ -10,9 +10,9 @@ function vUpdateData(req, res, next) {
     if (!isAlpha(lastName)) {
         errObj.lastName = "last name should only have letters, no special characters or numbers";
     }
-    if (!isAlphanumeric(username)) {
-        errObj.username = "username should not contain special characters or space";
-    }
+    // if (!isAlphanumeric(username)) {
+    //     errObj.username = "username should not contain special characters or space";
+    // }
     if (!isStrongPassword(password)) {
         errObj.password =
             'Your password must contain 1 lowercase, 1 uppercase, 1 number, 1 special character, and at least 8 characters long';

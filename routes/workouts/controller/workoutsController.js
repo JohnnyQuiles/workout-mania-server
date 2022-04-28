@@ -7,13 +7,9 @@ const router = require('../workoutsRouter');
 const createWorkout = async (req, res) => {
     try {
         const { workoutName, workoutReps, workoutSets, weight } = req.body;
-        
 
         let errObj = {};
 
-        if (!isAlpha(workoutName)) {
-            errObj.workoutName = "Alphabet only!";
-        }
         if (Object.keys(errObj).length > 0) {
             return res.status(500).json({ message: "Error", error: errObj });
         }
@@ -46,17 +42,38 @@ const getAllWorkouts = async (req, res) => {
         const decodedData = res.locals.decodedToken;
 
         const foundUser = await User.findOne({ email: decodedData.email });
-        if(!foundUser) throw { message: "User not found" };
+        if (!foundUser) throw { message: "User not found" };
 
-        const foundWorkouts = await Workouts({ workoutOwner: foundUser.id });
-        console.log("USER:",foundWorkouts);
+        const foundWorkouts = await Workouts.find({ workoutOwner: foundUser.id });
+        console.log("USER:", foundWorkouts);
         res.status(200).json({ payload: foundWorkouts });
     } catch (error) {
         res.status(500).json({ message: "Error", error: error.message });
         console.log(error);
     }
 };
+const updateWorkouts = async (req, res) => {
+    try {
+        const { workoutName, workoutReps, workoutSets, weight, workoutOwner } = req.body;
+
+        let errObj = {};
+
+    
+        if(Object.keys(errObj).length > 0) {
+            return res.status(500).json({ message: "Error", error: errObj})
+        }
+        const updatedWorkout = await Workouts.findByIdAndUpdate(workoutOwner, req.body, {
+            new: true
+        });
+        console.log(updatedWorkout);
+        res.status(200).json({ message:"Workout has been updated", payload: updatedWorkout})
+    } catch (error) {
+        res.status(500).json({ message: "Error", error: errorHandler(error)});
+        console.log(error);
+    }
+}
 module.exports = {
     createWorkout,
-    getAllWorkouts
+    getAllWorkouts,
+    updateWorkouts
 }
