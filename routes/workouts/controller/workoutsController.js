@@ -1,8 +1,7 @@
 const Workouts = require('../model/Workouts');
 const User = require('../../users/model/User');
-const { isAlpha, isInt } = require('validator');
 const { errorHandler } = require('../../users/utils/errorHandler');
-const router = require('../workoutsRouter');
+
 
 const createWorkout = async (req, res) => {
     try {
