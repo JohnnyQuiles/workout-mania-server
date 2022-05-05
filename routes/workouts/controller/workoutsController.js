@@ -37,6 +37,7 @@ const createWorkout = async (req, res) => {
     }
 };
 const getAllWorkouts = async (req, res) => {
+    // console.log("Starting.....");
     try {
         const decodedData = res.locals.decodedToken;
 
