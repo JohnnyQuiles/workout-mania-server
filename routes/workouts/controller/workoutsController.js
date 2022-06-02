@@ -33,7 +33,9 @@ const createWorkout = async (req, res) => {
         res.status(200).json({ message: "Workout saved successfully", payload: savedWorkout });
     } catch (error) {
         res.status(500).json(errorHandler(error));
+        alert("Workout unsuccessfully saved")
         console.log(error);
+
     }
 };
 const getAllWorkouts = async (req, res) => {
