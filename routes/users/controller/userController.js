@@ -15,7 +15,8 @@ const getCurrentUser = async (req, res) => {
         res.status(500).json({ message: "Error", error: error.message });
         console.log(error);
     }
-}
+};
+
 const createUser = async (req, res) => {
     try {
         const { firstName, lastName, username, email, password } = req.body;
@@ -35,17 +36,18 @@ const createUser = async (req, res) => {
         res.status(200).json({ message: "New user has been created", payload: savedUser });
     } catch (error) {
         res.status(500).json({ error: errorHandler(error) });
-        console.log(error);
+        console.log("Error:",error);
     }
 };
+
 const userLogin = async (req, res) => {
     try {
-        const { email, password } = req.body;
-        const foundUser = await User.findOne({ email: email });
-        if (foundUser === null) throw { message: "Email not found" };
+        const { username, password } = req.body;
+        const foundUser = await User.findOne({ username: username });
+        if (foundUser === null) throw { message: "username not found" };
 
         const comparedPassword = await bcrypt.compare(password, foundUser.password);
-        if (!comparedPassword) throw { message: "Email and Password do not match" };
+        if (!comparedPassword) throw { message: "username and Password do not match" };
 
         const jwtToken = jwt.sign({
             firstName: foundUser.firstName,
@@ -58,6 +60,7 @@ const userLogin = async (req, res) => {
         res.status(500).json({ payload: error.message });
     }
 };
+
 const updateTheProfile = async (req, res) => {
     try {
         const decodedToken = res.locals.decodedToken;
@@ -72,7 +75,8 @@ const updateTheProfile = async (req, res) => {
         res.status(500).json({ error: errorHandler(error) });
         console.log(error);
     }
-}
+};
+
 module.exports = {
     createUser,
     userLogin,
