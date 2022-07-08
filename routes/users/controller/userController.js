@@ -49,13 +49,13 @@ const userLogin = async (req, res) => {
         const comparedPassword = await bcrypt.compare(password, foundUser.password);
         if (!comparedPassword) throw { message: "username and Password do not match" };
 
-        const jwtToken = jwt.sign({
-            firstName: foundUser.firstName,
-            lastName: foundUser.lastName,
-            email: foundUser.email,
-            username: foundUser.username,
-        }, process.env.SECRET_KEY, { expiresIn: "1yr" });
-        res.status(200).json({ payload: jwtToken });
+        // const jwtToken = jwt.sign({
+        //     firstName: foundUser.firstName,
+        //     lastName: foundUser.lastName,
+        //     email: foundUser.email,
+        //     username: foundUser.username,
+        // }, process.env.SECRET_KEY, { expiresIn: "1yr" });
+        res.status(200).json({ payload: foundUser });
     } catch (error) {
         res.status(500).json({ payload: error.message });
     }

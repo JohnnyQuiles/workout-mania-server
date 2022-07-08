@@ -7,8 +7,8 @@ const { checkIsEmpty, jwtMiddleware, vCreateData, vLoginData, vUpdateData } = re
 /* GET users listing. */
 router.get('/', function(req, res, next) { res.send('Hello from Workout-Mania User Router :D')});
 router.get('/get-current-user', jwtMiddleware, getCurrentUser);
-router.post('/create', checkIsEmpty, createUser);
-router.post('/login', checkIsEmpty, userLogin);
+router.post('/create', createUser);
+router.post('/login', userLogin);
 router.post('/update-user-profile', jwtMiddleware, checkIsEmpty, vUpdateData, updateTheProfile);
 
 module.exports = router;
