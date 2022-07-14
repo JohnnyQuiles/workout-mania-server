@@ -36,7 +36,7 @@ const createUser = async (req, res) => {
         res.status(200).json({ message: "New user has been created", payload: savedUser });
     } catch (error) {
         res.status(500).json({ error: errorHandler(error) });
-        console.log("Error:",error);
+        console.log("Error:", error);
     }
 };
 
