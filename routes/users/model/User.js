@@ -6,7 +6,6 @@ const userSchema = new mongoose.Schema({
     email: { type: String, unique: true },
     username: { type: String, unique: true },
     password: String,
-    workoutHistory: [{ type: mongoose.Schema.ObjectId, ref: "workouts" }],
 }, { timestamps: true });
 
 //error code 11000
