@@ -2,7 +2,7 @@ const User = require('../model/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { errorHandler } = require('../utils/errorHandler');
-0
+
 const getCurrentUser = async (req, res) => {
     try {
         const { decodedToken } = res.locals;
